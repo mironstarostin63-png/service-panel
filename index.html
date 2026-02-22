@@ -20,8 +20,8 @@
         }
 
         body {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                        url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070&auto=format&fit=crop');
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1544161515-4ae6ce6ea858?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -40,7 +40,7 @@
             font-weight: 200; 
             font-size: 30px;
             text-transform: uppercase;
-            letter-spacing: 5px;
+            letter-spacing: 6px;
             text-align: center;
             text-shadow: 0 2px 15px rgba(0,0,0,0.6);
         }
@@ -49,43 +49,49 @@
             background: rgba(255, 255, 255, 0.07);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            padding: 40px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+            padding: 45px;
+            border-radius: 45px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
             width: 90%;
-            max-width: 800px;
+            max-width: 850px;
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            gap: 25px;
         }
 
         .btn {
             border: none;
-            height: 80px;
-            font-size: 15px;
+            height: 85px;
+            font-size: 16px;
             font-weight: 400;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 18px;
+            letter-spacing: 2.5px;
+            border-radius: 20px;
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             color: white;
-            position: relative;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-            padding: 0 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: scale(0.95);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
         }
 
         .btn:active {
-            transform: scale(0.9);
-            filter: brightness(1.5) saturate(1.3);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            transform: scale(0.85);
+            filter: brightness(1.6) saturate(1.2);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
 
-        /* Цвета кнопок в премиальном стиле */
         .btn-tea { background: linear-gradient(135deg, #8ba88e 0%, #5f7a62 100%); }
         .btn-food { background: linear-gradient(135deg, #c29e5d 0%, #947641 100%); }
         .btn-massage { background: linear-gradient(135deg, #6b8e8e 0%, #4a6666 100%); }
@@ -94,8 +100,8 @@
 
         @media (max-width: 600px) {
             .grid { grid-template-columns: 1fr; }
-            h1 { font-size: 24px; }
-            .btn { height: 70px; }
+            .container { padding: 30px; }
+            .btn { height: 75px; }
         }
     </style>
 
@@ -106,17 +112,30 @@
 
         function sendSignal(serviceName) {
             const btn = event.currentTarget;
-            btn.style.opacity = "0.7";
+            const originalText = btn.innerText;
+
+            btn.style.pointerEvents = "none";
+            btn.innerText = "ОТПРАВКА...";
             
             emailjs.send("service_brsik8k", "template_5goji7i", {
                 button_name: serviceName,
                 time: new Date().toLocaleString()
             }).then(function() {
-                alert("Запрос принят: " + serviceName);
-                btn.style.opacity = "1";
+                btn.innerText = "ГОТОВО ✓";
+                btn.style.filter = "brightness(1.6) saturate(1.2)";
+                
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.pointerEvents = "auto";
+                    btn.style.filter = "none";
+                }, 2500);
+
             }, function() {
-                alert("Ошибка связи. Попробуйте снова.");
-                btn.style.opacity = "1";
+                btn.innerText = "ОШИБКА";
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.pointerEvents = "auto";
+                }, 2500);
             });
         }
     </script>
