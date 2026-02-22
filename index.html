@@ -3,14 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SPA Premium System</title>
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="SPA Сервис">
-
+    <title>Premium SPA Experience</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    
     <style>
         * {
             box-sizing: border-box;
@@ -21,7 +15,7 @@
 
         body {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('https://images.unsplash.com/photo-1544161515-4ae6ce6ea858?q=80&w=2070&auto=format&fit=crop');
+                        url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -30,141 +24,139 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            font-family: 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            overflow: hidden;
+            font-family: 'SF Pro Display', -apple-system, system-ui, sans-serif;
         }
 
         h1 {
             color: white;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             font-weight: 200; 
             font-size: 28px;
             text-transform: uppercase;
-            letter-spacing: 6px;
+            letter-spacing: 8px;
             text-align: center;
-            text-shadow: 0 2px 15px rgba(0,0,0,0.6);
+            text-shadow: 0 5px 25px rgba(0,0,0,0.8);
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            padding: 40px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
-            width: 90%;
-            max-width: 850px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            padding: 40px 25px;
+            border-radius: 45px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            width: 92%;
+            max-width: 600px;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
             width: 100%;
         }
 
         .btn {
-            border: none;
-            height: 80px;
-            font-size: 14px;
-            font-weight: 400;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 70px;
+            font-size: 15px;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 18px;
+            letter-spacing: 1.5px;
+            border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.25s ease-out;
             color: white;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             text-decoration: none;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            padding: 0 10px;
         }
 
-        .btn:hover { transform: scale(0.96); }
-        .btn:active { transform: scale(0.88); filter: brightness(1.5); }
+        .btn:active {
+            transform: scale(0.93) translateY(2px);
+            filter: brightness(1.3);
+        }
 
-        .btn-tea { background: linear-gradient(135deg, #8ba88e 0%, #5f7a62 100%); }
-        .btn-food { background: linear-gradient(135deg, #c29e5d 0%, #947641 100%); }
-        .btn-massage { background: linear-gradient(135deg, #6b8e8e 0%, #4a6666 100%); }
-        .btn-water { background: linear-gradient(135deg, #7da1b8 0%, #527185 100%); }
+        .btn-tea { background: linear-gradient(135deg, #7d9480, #4d5c4f); }
+        .btn-food { background: linear-gradient(135deg, #b89860, #856d43); }
+        .btn-massage { background: linear-gradient(135deg, #628a8a, #3d5757); }
+        .btn-water { background: linear-gradient(135deg, #7496ad, #455d6e); }
         
         .btn-snack { 
-            background: linear-gradient(135deg, #b88b8b 0%, #8c5d5d 100%); 
+            background: linear-gradient(135deg, #ad8181, #7a5858); 
             grid-column: span 2;
+            height: 80px;
         }
 
-        .bottom-grid {
+        .bottom-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 15px;
+            margin-top: 15px;
             width: 100%;
-            margin-top: 20px;
         }
 
-        .btn-help { background: linear-gradient(135deg, #7d84b8 0%, #555c8c 100%); }
-        .btn-support { background: linear-gradient(135deg, #5c8d8d 0%, #3a5c5c 100%); }
+        .btn-help { background: linear-gradient(135deg, #6c74a3, #454a6b); }
+        .btn-support { background: linear-gradient(135deg, #4d7a7a, #2e4d4d); }
 
-        @media (max-width: 600px) {
-            .grid, .bottom-grid { grid-template-columns: repeat(2, 1fr); }
-            .btn-snack { grid-column: span 2; }
-            .btn { height: 70px; font-size: 11px; }
+        @media (max-width: 480px) {
+            .btn { height: 65px; font-size: 13px; letter-spacing: 1px; }
+            .btn-snack { height: 75px; }
+            .container { padding: 30px 15px; }
+            h1 { font-size: 24px; letter-spacing: 5px; }
         }
     </style>
 
     <script type="text/javascript">
-        (function() {
-            emailjs.init("HnFVx9m2zPmPYkWiO");
-        })();
+        (function() { emailjs.init("HnFVx9m2zPmPYkWiO"); })();
 
         function sendSignal(serviceName) {
             const btn = event.currentTarget;
             const originalText = btn.innerText;
             btn.style.pointerEvents = "none";
-            btn.innerText = "ОТПРАВКА...";
+            btn.innerText = "В ОБРАБОТКЕ...";
             
             emailjs.send("service_brsik8k", "template_5goji7i", {
                 button_name: serviceName,
                 time: new Date().toLocaleString()
             }).then(function() {
-                btn.innerText = "ГОТОВО ✓";
-                btn.style.filter = "brightness(1.6)";
+                btn.innerText = "ОТПРАВЛЕНО ✓";
                 setTimeout(() => {
                     btn.innerText = originalText;
                     btn.style.pointerEvents = "auto";
-                    btn.style.filter = "none";
-                }, 2500);
+                }, 2000);
             }, function() {
                 btn.innerText = "ОШИБКА";
                 setTimeout(() => {
                     btn.innerText = originalText;
                     btn.style.pointerEvents = "auto";
-                }, 2500);
+                }, 2000);
             });
         }
     </script>
 </head>
 <body>
 
-    <h1>Сервис обслуживания</h1>
+    <h1>Luxury Spa Service</h1>
 
     <div class="container">
         <div class="grid">
-            <button class="btn btn-tea" onclick="sendSignal('ЗАКАЗАТЬ ЧАЙ')">ЗАКАЗАТЬ ЧАЙ</button>
-            <button class="btn btn-food" onclick="sendSignal('ЗАКАЗАТЬ ЕДУ')">ЗАКАЗАТЬ ЕДУ</button>
-            <button class="btn btn-massage" onclick="sendSignal('ЗАКАЗАТЬ МАССАЖИСТА')">ЗАКАЗАТЬ МАССАЖИСТА</button>
-            <button class="btn btn-water" onclick="sendSignal('ПРИНЕСТИ ВОДУ')">ПРИНЕСТИ ВОДУ</button>
-            <button class="btn btn-snack" onclick="sendSignal('ПРИНЕСТИ ПЕРЕКУС')">ПРИНЕСТИ ПЕРЕКУС</button>
+            <button class="btn btn-tea" onclick="sendSignal('ЭЛИТНЫЙ ЧАЙ')">ЭЛИТНЫЙ ЧАЙ</button>
+            <button class="btn btn-food" onclick="sendSignal('ПРЕМИУМ КУХНЯ')">ПРЕМИУМ КУХНЯ</button>
+            <button class="btn btn-massage" onclick="sendSignal('ВЫЗОВ МАСТЕРА')">ВЫЗОВ МАСТЕРА</button>
+            <button class="btn btn-water" onclick="sendSignal('МИНЕРАЛЬНАЯ ВОДА')">МИНЕРАЛЬНАЯ ВОДА</button>
+            <button class="btn btn-snack" onclick="sendSignal('ГАСТРОНОМИЧЕСКИЙ СЕТ')">ГАСТРОНОМИЧЕСКИЙ СЕТ</button>
         </div>
         
-        <div class="bottom-grid">
-            <button class="btn btn-help" onclick="sendSignal('ВЫЗВАТЬ ПОМОЩЬ')">ВЫЗВАТЬ ПОМОЩЬ</button>
-            <a href="https://t.me/MironSpa_bot" class="btn btn-support">СЛУЖБА ПОДДЕРЖКИ</a>
+        <div class="bottom-row">
+            <button class="btn btn-help" onclick="sendSignal('ЭКСТРЕННЫЙ ВЫЗОВ')">ЭКСТРЕННЫЙ ВЫЗОВ</button>
+            <a href="https://t.me/MironSpa_bot" class="btn btn-support">ЛИЧНЫЙ КОНСЬЕРЖ</a>
         </div>
     </div>
 
