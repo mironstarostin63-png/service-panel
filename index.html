@@ -3,138 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SPA Service System</title>
-
+    <title>SPA Premium System</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="SPA Сервис">
-
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                        url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            font-family: 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            overflow: hidden;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1544161515-4ae6ce6ea858?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-height: 100vh; font-family: 'SF Pro Display', sans-serif; overflow: hidden;
         }
-
-        h1 {
-            color: white;
-            margin-bottom: 40px;
-            font-weight: 200; 
-            font-size: 30px;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            text-align: center;
-            text-shadow: 0 2px 15px rgba(0,0,0,0.6);
-        }
-
+        h1 { color: white; margin-bottom: 35px; font-weight: 200; font-size: 28px; text-transform: uppercase; letter-spacing: 6px; text-align: center; }
         .container {
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            padding: 40px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
-            width: 90%;
-            max-width: 800px;
+            background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            padding: 40px; border-radius: 40px; border: 1px solid rgba(255, 255, 255, 0.15);
+            width: 90%; max-width: 850px; display: flex; flex-direction: column; align-items: center;
         }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; width: 100%; }
         .btn {
-            border: none;
-            height: 80px;
-            font-size: 15px;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 18px;
-            cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            color: white;
-            position: relative;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-            padding: 0 15px;
+            border: none; height: 80px; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;
+            border-radius: 18px; cursor: pointer; transition: all 0.3s ease; color: white;
+            display: flex; align-items: center; justify-content: center; text-decoration: none;
         }
-
-        .btn:active {
-            transform: scale(0.9);
-            filter: brightness(1.5) saturate(1.3);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
-        }
-
-        /* Цвета кнопок в премиальном стиле */
+        .btn:hover { transform: scale(0.96); }
+        .btn:active { transform: scale(0.88); filter: brightness(1.5); }
         .btn-tea { background: linear-gradient(135deg, #8ba88e 0%, #5f7a62 100%); }
         .btn-food { background: linear-gradient(135deg, #c29e5d 0%, #947641 100%); }
         .btn-massage { background: linear-gradient(135deg, #6b8e8e 0%, #4a6666 100%); }
         .btn-water { background: linear-gradient(135deg, #7da1b8 0%, #527185 100%); }
-        .btn-snack { background: linear-gradient(135deg, #b88b8b 0%, #8c5d5d 100%); }
-
-        @media (max-width: 600px) {
-            .grid { grid-template-columns: 1fr; }
-            h1 { font-size: 24px; }
-            .btn { height: 70px; }
-        }
+        .btn-snack { background: linear-gradient(135deg, #b88b8b 0%, #8c5d5d 100%); grid-column: span 2; }
+        .btn-help { background: linear-gradient(135deg, #7d84b8 0%, #555c8c 100%); width: 100%; max-width: 450px; margin-top: 25px; }
+        .btn-support { background: linear-gradient(135deg, #5c8d8d 0%, #3a5c5c 100%); width: 100%; max-width: 450px; margin-top: 15px; }
     </style>
-
-    <script type="text/javascript">
-        (function() {
-            emailjs.init("HnFVx9m2zPmPYkWiO");
-        })();
-
-        function sendSignal(serviceName) {
-            const btn = event.currentTarget;
-            btn.style.opacity = "0.7";
-            
-            emailjs.send("service_brsik8k", "template_5goji7i", {
-                button_name: serviceName,
-                time: new Date().toLocaleString()
-            }).then(function() {
-                alert("Запрос принят: " + serviceName);
-                btn.style.opacity = "1";
-            }, function() {
-                alert("Ошибка связи. Попробуйте снова.");
-                btn.style.opacity = "1";
+    <script>
+        (function() { emailjs.init("HnFVx9m2zPmPYkWiO"); })();
+        function sendSignal(name) {
+            const btn = event.currentTarget; const old = btn.innerText;
+            btn.style.pointerEvents = "none"; btn.innerText = "ОТПРАВКА...";
+            emailjs.send("service_brsik8k", "template_5goji7i", { button_name: name, time: new Date().toLocaleString() })
+            .then(() => {
+                btn.innerText = "ГОТОВО ✓"; btn.style.filter = "brightness(1.6)";
+                setTimeout(() => { btn.innerText = old; btn.style.pointerEvents = "auto"; btn.style.filter = "none"; }, 2500);
             });
         }
     </script>
 </head>
 <body>
-
     <h1>Сервис обслуживания</h1>
-
     <div class="container">
         <div class="grid">
             <button class="btn btn-tea" onclick="sendSignal('ЗАКАЗАТЬ ЧАЙ')">ЗАКАЗАТЬ ЧАЙ</button>
             <button class="btn btn-food" onclick="sendSignal('ЗАКАЗАТЬ ЕДУ')">ЗАКАЗАТЬ ЕДУ</button>
             <button class="btn btn-massage" onclick="sendSignal('ЗАКАЗАТЬ МАССАЖИСТА')">ЗАКАЗАТЬ МАССАЖИСТА</button>
             <button class="btn btn-water" onclick="sendSignal('ПРИНЕСТИ ВОДУ')">ПРИНЕСТИ ВОДУ</button>
-            <button class="btn btn-snack" onclick="sendSignal('ПРИНЕСТИ ПЕРЕКУС (1)')">ПРИНЕСТИ ПЕРЕКУС</button>
-            <button class="btn btn-snack" onclick="sendSignal('ПРИНЕСТИ ПЕРЕКУС (2)')">ПРИНЕСТИ ПЕРЕКУС</button>
+            <button class="btn btn-snack" onclick="sendSignal('ПРИНЕСТИ ПЕРЕКУС')">ПРИНЕСТИ ПЕРЕКУС</button>
         </div>
+        <button class="btn btn-help" onclick="sendSignal('ВЫЗВАТЬ ПОМОЩЬ')">ВЫЗВАТЬ ПОМОЩЬ</button>
+        <a href="https://t.me/MironSpa_bot" class="btn btn-support">СЛУЖБА ПОДДЕРЖКИ (БОТ)</a>
     </div>
-
 </body>
 </html>
